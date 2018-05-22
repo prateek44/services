@@ -17,6 +17,11 @@
       console.log("invoking addingItemsToListService ");
       addingItemsToListService.addToItems(addList.itemName,addList.itemQty);
     };
+    addList.removeItem=function()
+    {
+      console.log("invoking addingItemsToListService ");
+      addingItemsToListService.removeItems();
+    };
 
   }
   function showListController(addingItemsToListService)
@@ -34,6 +39,8 @@
   {
     var service=this;
       var itemList=[];
+      var startIndex=0;
+      var numberOfItemsToSplice=1;
     console.log('addingItemsToListService...');
     service.addToItems=function(currentItemName,currentItemQty)
     {
@@ -48,5 +55,13 @@
       console.log('service invoked to fetch the added item list');
       return itemList;
     };
+    service.removeItems=function()
+    {
+        console.log('service invoked to delete the added item list');
+        itemList.splice(startIndex,numberOfItemsToSplice);
+        console.log('item removed successfully');
+
+
+    }
   }
 })();
