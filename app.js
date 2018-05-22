@@ -2,14 +2,15 @@
 {
   'use strict';
   angular.module("serviceApp",[])
-  .controller("addToListController",['addingItemsToListService',addToListController])
-  .controller("showListController",['addingItemsToListService',showListController])
-  .service("addingItemsToListService",addingItemsToListService);
-  function addToListController(addingItemsToListService)
+  .controller("addToListController",['addingItemsToListServiceFactory',addToListController])
+  .controller("showListController",['addingItemsToListServiceFactory',showListController])
+  .factory("addingItemsToListServiceFactory",addingItemsToListServiceFactory);
+  function addToListController(addingItemsToListServiceFactory)
   {
     console.log('addToListController');
 
     var addList=this;
+    var addingItemsToListService=addingItemsToListServiceFactory();
     addList.itemName="";
     addList.itemQty="";
     addList.addToItem=function()
@@ -24,16 +25,40 @@
     };
 
   }
-  function showListController(addingItemsToListService)
+  function showListController(addingItemsToListServiceFactory)
   {
     console.log('showListController');
     var showList=this;
-    showList.addedItemList=addingItemsToListService.getItems();
+
+    var addingItemsToListServices=addingItemsToListServiceFactory();
+    showList.addedItemList=addingItemsToListServices.getItems();
     // showList.getItemList=function()
     // {
     //   console.log('invoking service to fetch the added item list');
     //   addingItemsToListService.getItems();
     // };
+  }
+  function addingItemsToListServiceFactory()
+  {
+    console.log('addingItemsToListServiceFactory');
+    var instance="";
+    if(instance==="")
+    {
+      instance=function()
+      { var temp;
+        // singleton factory method
+        if(temp===null || temp===undefined || temp==="")
+        {
+          temp=new addingItemsToListService();
+        }
+        return temp;
+      };
+
+    }
+
+    console.log("instance",instance);
+    return instance;
+
   }
   function addingItemsToListService()
   {
