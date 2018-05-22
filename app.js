@@ -3,7 +3,7 @@
   'use strict';
   angular.module("serviceApp",[])
   .controller("addToListController",['addingItemsToListServiceFactory',addToListController])
-  .controller("showListController",['addingItemsToListServiceFactory',showListController])
+  //.controller("showListController",['addingItemsToListServiceFactory',showListController])
   .factory("addingItemsToListServiceFactory",addingItemsToListServiceFactory);
   function addToListController(addingItemsToListServiceFactory)
   {
@@ -23,40 +23,32 @@
       console.log("invoking addingItemsToListService ");
       addingItemsToListService.removeItems();
     };
+    //var showList=this;
+
+  //  var addingItemsToListServices=addingItemsToListServiceFactory();
+    addList.addedItemList=addingItemsToListService.getItems();
 
   }
-  function showListController(addingItemsToListServiceFactory)
-  {
-    console.log('showListController');
-    var showList=this;
-
-    var addingItemsToListServices=addingItemsToListServiceFactory();
-    showList.addedItemList=addingItemsToListServices.getItems();
-    // showList.getItemList=function()
-    // {
-    //   console.log('invoking service to fetch the added item list');
-    //   addingItemsToListService.getItems();
-    // };
-  }
+  // function showListController(addingItemsToListServiceFactory)
+  // {
+  //   console.log('showListController');
+  //   var showList=this;
+  //
+  //   var addingItemsToListServices=addingItemsToListServiceFactory();
+  //   showList.addedItemList=addingItemsToListServices.getItems();
+  //   // showList.getItemList=function()
+  //   // {
+  //   //   console.log('invoking service to fetch the added item list');
+  //   //   addingItemsToListService.getItems();
+  //   // };
+  // }
   function addingItemsToListServiceFactory()
   {
     console.log('addingItemsToListServiceFactory');
-    var instance="";
-    if(instance==="")
+    var instance=function()
     {
-      instance=function()
-      { var temp;
-        // singleton factory method
-        if(temp===null || temp===undefined || temp==="")
-        {
-          temp=new addingItemsToListService();
-        }
-        return temp;
-      };
-
-    }
-
-    console.log("instance",instance);
+      return new addingItemsToListService();
+    };
     return instance;
 
   }

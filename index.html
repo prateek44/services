@@ -4,8 +4,8 @@
     <script src="app.js"></script>
   </head>
   <body >
-    <div>
-      <div ng-controller="addToListController as addList">
+    <div ng-controller="addToListController as addList">
+      <div >
         Name:<input type="text" ng-model="addList.itemName">{{addList.itemName}}
         Quantity:<input type="text" ng-model="addList.itemQty">{{addList.itemQty}}
         <br>
@@ -15,9 +15,9 @@
         <br>
         <button type="text" ng-click="addList.removeItem();">Remove Items</button>
       </div>
-      <div ng-controller="showListController as showList">
+      <div>
         <ol >
-          <li ng-repeat="item in showList.addedItemList">
+          <li ng-repeat="item in addList.addedItemList">
             {{item.name}}  {{item.quantity}}
           </li>
 
