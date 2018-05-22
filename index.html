@@ -3,8 +3,24 @@
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
   </head>
-  <body ng-controller="serviceAppController">
+  <body >
     <div>
+      <div ng-controller="addToListController as addList">
+        Name:<input type="text" ng-model="addList.itemName">{{addList.itemName}}
+        Quantity:<input type="text" ng-model="addList.itemQty">{{addList.itemQty}}
+        <br>
+        <br>
+        <button type="text" ng-click="addList.addToItem();">Add Items</button>
+      </div>
+      <div ng-controller="showListController as showList">
+        <ol >
+          <li ng-repeat="item in showList.addedItemList">
+            {{item.name}}  {{item.quantity}}
+          </li>
+
+
+        </ol>
+      </div>
     </div>
   </body>
   </html>
